@@ -13,8 +13,8 @@ app.use(express.static(path.join(import.meta.dirname, "public")));
 app.use(cors());
 
 app.use(routes.authRouter);
-app.use("/recipes", authenticateJWT, routes.recipeRouter);
-app.get("/user", authenticateJWT, (req, res) => res.send(req.user));
+app.use("/api/users", authenticateJWT, routes.userRouter);
+app.use("/api/messages", authenticateJWT, routes.messageRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
