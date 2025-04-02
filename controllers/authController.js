@@ -20,8 +20,7 @@ const validateSignUp = [
         throw new Error("Email already exists! Try a different one.");
       }
     }),
-    body("name")
-    .trim()
+  body("name").trim(),
 ];
 
 const userSignUp = [
@@ -31,9 +30,20 @@ const userSignUp = [
     if (!errors.isEmpty()) {
       return res.status(409).send({ errors: errors.array() });
     }
+    const { name, email } = req.body;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     await prisma.user.create({
-      data: { ...req.body, password: hashedPassword },
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        profile: {
+          create: {},
+        },
+      },
+      include: {
+        profile: true,
+      },
     });
     res.sendStatus(200);
   }),
