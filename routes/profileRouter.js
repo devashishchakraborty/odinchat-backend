@@ -6,4 +6,4 @@ const profileRouter = Router();
 profileRouter.get("/", profileController.getProfileByUserId);
 profileRouter.put("/", profileController.editProfile);
 
-export default userRouter;
+export default profileRouter;
