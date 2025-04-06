@@ -60,7 +60,9 @@ const userLogin = (req, res, next) => {
       email: user.email,
       name: user.name,
     };
-    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
+    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "30d",
+    });
     return res.send({ token });
   })(req, res, next);
 };
