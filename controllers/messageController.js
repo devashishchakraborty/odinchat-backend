@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 // Getting messages between user and texter
 const getMessages = async (req, res) => {
-  const { texterId } = req.query;
+  const { texterId } = req.params;
   const messages = await prisma.message.findMany({
     where: {
       OR: [
