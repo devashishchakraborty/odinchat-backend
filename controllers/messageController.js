@@ -9,11 +9,11 @@ const getMessages = async (req, res) => {
     where: {
       OR: [
         {
-          sender_id: parseInt(req.user.id),
+          author_id: parseInt(req.user.id),
           receiver_id: parseInt(texterId),
         },
         {
-          sender_id: parseInt(texterId),
+          author_id: parseInt(texterId),
           receiver_id: parseInt(req.user.id),
         },
       ],
