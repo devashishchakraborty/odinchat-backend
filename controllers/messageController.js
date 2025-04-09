@@ -30,12 +30,13 @@ const getMessages = async (req, res) => {
 };
 
 const createMessage = async (req, res) => {
-  const { text, receiverId } = req.body;
+  const { text } = req.body;
+  const { texterId } = req.params;
   const message = await prisma.message.create({
     data: {
       text: text,
-      receiver_id: parseInt(receiverId),
-      sender_id: req.user.id,
+      receiver_id: parseInt(texterId),
+      author_id: req.user.id,
     },
   });
   if (!message) {
@@ -50,7 +51,7 @@ const deleteMessage = async (req, res) => {
   const message = await prisma.message.delete({
     where: {
       id: parseInt(messageId),
-      sender_id: parseInt(req.user.id),
+      author_id: parseInt(req.user.id),
     },
   });
 
@@ -61,5 +62,5 @@ const deleteMessage = async (req, res) => {
 export default {
   getMessages,
   createMessage,
-  deleteMessage
-}
+  deleteMessage,
+};
