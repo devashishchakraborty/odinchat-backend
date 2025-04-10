@@ -19,7 +19,7 @@ const getMessages = async (req, res) => {
       ],
     },
     orderBy: {
-      created_at: "desc",
+      created_at: "asc",
     },
   });
   if (!messages) {
