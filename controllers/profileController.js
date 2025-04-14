@@ -14,12 +14,16 @@ const getProfileByUserId = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  const profileDetails = req.body;
+  const { bio, skills, country } = req.body;
   const profile = await prisma.profile.update({
     where: {
       user_id: parseInt(req.user.id),
     },
-    data: profileDetails,
+    data: {
+      bio,
+      skills,
+      country,
+    },
   });
 
   if (!user) return res.sendStatus(500);
