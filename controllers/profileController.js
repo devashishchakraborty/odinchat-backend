@@ -26,7 +26,7 @@ const editProfile = async (req, res) => {
     },
   });
 
-  if (!user) return res.sendStatus(500);
+  if (!profile) return res.sendStatus(500);
   res.send(profile);
 };
 
