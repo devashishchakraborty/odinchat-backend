@@ -7,6 +7,14 @@ const getProfileByUserId = async (req, res) => {
     where: {
       user_id: parseInt(req.params.userId) || req.user.id,
     },
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true, // Select only the name and email fields
+        },
+      },
+    },
   });
 
   if (!profile) return res.sendStatus(500);
